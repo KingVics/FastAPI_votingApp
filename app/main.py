@@ -3,6 +3,8 @@ from . import models, database
 from .router import posts, users, auth, vote
 from .config import settings
 from fastapi.middleware.cors import CORSMiddleware
+import os
+import uvicorn
 
 print(settings.database_username)
 
@@ -34,3 +36,6 @@ app.include_router(vote.router)
 
 
 
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=False)
